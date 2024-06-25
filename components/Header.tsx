@@ -1,44 +1,29 @@
-import NextLogo from "./NextLogo";
-import SupabaseLogo from "./SupabaseLogo";
+"use client";
+import { Navbar } from "flowbite-react";
+import AuthButton from "./AuthButtonClient";
 
 export default function Header() {
   return (
-    <div className="flex flex-col gap-16 items-center">
-      <div className="flex gap-8 justify-center items-center">
-        <a
-          href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <SupabaseLogo />
-        </a>
-        <span className="border-l rotate-45 h-6" />
-        <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
-          <NextLogo />
-        </a>
+    <Navbar rounded>
+      <div className="flex">
+        <Navbar.Toggle />
+        <Navbar.Brand href="https://flowbite-react.com">
+          <span className="self-center whitespace-nowrap text-xl sm:text-2xl font-bold text-green-600">
+            Travel Yuks
+          </span>
+        </Navbar.Brand>
       </div>
-      <h1 className="sr-only">Supabase and Next.js Starter Template</h1>
-      <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center">
-        The fastest way to build apps with{" "}
-        <a
-          href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-          target="_blank"
-          className="font-bold hover:underline"
-          rel="noreferrer"
-        >
-          Supabase
-        </a>{" "}
-        and{" "}
-        <a
-          href="https://nextjs.org/"
-          target="_blank"
-          className="font-bold hover:underline"
-          rel="noreferrer"
-        >
-          Next.js
-        </a>
-      </p>
-      <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent my-8" />
-    </div>
+
+      <div className="flex items-center md:order-2">
+        <Navbar.Collapse>
+          <Navbar.Link href="/">Home</Navbar.Link>
+          <Navbar.Link href="/#">Tour Packages</Navbar.Link>
+          <Navbar.Link href="/#">Destinations</Navbar.Link>
+          <Navbar.Link href="/#">Gallery</Navbar.Link>
+          <Navbar.Link href="/#">Contact Us</Navbar.Link>
+        </Navbar.Collapse>
+        <AuthButton />
+      </div>
+    </Navbar>
   );
 }
