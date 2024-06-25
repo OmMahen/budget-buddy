@@ -16,7 +16,7 @@ export default function AuthButton() {
   const signOut = async () => {
     const supabase = createClient();
     await supabase.auth.signOut();
-    router.push("/");
+    location.reload();
   };
 
   return user ? (
