@@ -1,8 +1,11 @@
 "use client";
 import { Navbar } from "flowbite-react";
 import AuthButton from "./AuthButtonClient";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const pathname = usePathname();
+  if(pathname === "/login") return <></>
   return (
     <Navbar rounded>
       <div className="flex">

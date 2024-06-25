@@ -25,7 +25,7 @@ export default function RootLayout({
         <body className="bg-background text-foreground">
           <Flowbite>
             <Header />
-            <main className="flex min-h-screen flex-col items-center justify-between bg-white dark:bg-black">
+            <main className="flex min-h-screen flex-col items-center justify-between bg-white dark:bg-black text-black dark:text-white">
               {children}
             </main>
             <DarkThemeToggle className="fixed bottom-0 right-0 z-50 m-4 scale-130 " />

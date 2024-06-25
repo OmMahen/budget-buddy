@@ -20,11 +20,11 @@ export default function AuthButton() {
   };
 
   return user ? (
-    <Button className="ml-4 bg-green-600" onClick={signOut}>
+    <Button className="ml-4 bg-green-600 dark:bg-green-600" onClick={signOut}>
       Logout
     </Button>
   ) : (
-    <Button className="ml-4 bg-green-600" onClick={signIn}>
+    <Button className="ml-4 bg-green-600 dark:bg-green-600" onClick={signIn}>
       Login
     </Button>
   );
