@@ -10,7 +10,7 @@ export default function Header() {
     <Navbar rounded>
       <div className="flex">
         <Navbar.Toggle />
-        <Navbar.Brand href="https://flowbite-react.com">
+        <Navbar.Brand href="/">
           <span className="self-center whitespace-nowrap text-xl sm:text-2xl font-bold text-green-600">
             Travel Yuks
           </span>
