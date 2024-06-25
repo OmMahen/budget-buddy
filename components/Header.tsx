@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 export default function Header() {
   const pathname = usePathname();
-  if(pathname === "/login") return <></>
+  if (pathname === "/login") return <></>;
   return (
     <Navbar rounded>
       <div className="flex">
@@ -16,17 +16,18 @@ export default function Header() {
           </span>
         </Navbar.Brand>
       </div>
-
+      
       <div className="flex items-center md:order-2">
-        <Navbar.Collapse>
-          <Navbar.Link href="/">Home</Navbar.Link>
-          <Navbar.Link href="/#">Tour Packages</Navbar.Link>
-          <Navbar.Link href="/#">Destinations</Navbar.Link>
-          <Navbar.Link href="/#">Gallery</Navbar.Link>
-          <Navbar.Link href="/#">Contact Us</Navbar.Link>
-        </Navbar.Collapse>
         <AuthButton />
       </div>
+
+      <Navbar.Collapse>
+        <Navbar.Link href="/">Home</Navbar.Link>
+        <Navbar.Link href="/#">Tour Packages</Navbar.Link>
+        <Navbar.Link href="/#">Destinations</Navbar.Link>
+        <Navbar.Link href="/#">Gallery</Navbar.Link>
+        <Navbar.Link href="/#">Contact Us</Navbar.Link>
+      </Navbar.Collapse>
     </Navbar>
   );
 }
