@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { UserContext } from "@/utils/userContext";
 import { useContext } from "react";
 
@@ -6,7 +6,7 @@ export function Hero() {
   const [user, setUser] = useContext(UserContext);
 
   const getEmailName = (email: any) => {
-    return email.split('@')[0];
+    return email.split("@")[0];
   };
 
   return (
@@ -17,12 +17,10 @@ export function Hero() {
         </h1>
       ) : (
         <h1 className="text-3xl md:text-5xl font-bold text-green-600">
-          Explore Lombok with Travel Yuks
+          Budget Buddy
         </h1>
       )}
-      <p className="mt-4">
-        Travel Yuks Terdepan Dalam Melayani Anda
-      </p>
+      <p className="mt-4">Stay on Budget, Every Transaction.</p>
     </section>
   );
 }

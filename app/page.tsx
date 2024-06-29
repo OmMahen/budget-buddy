@@ -1,11 +1,11 @@
 import { Hero } from "@/components/Hero";
-import { PopularTourPackages } from "@/components/PopularTourPackages";
+import BalanceDisplay from "@/components/Balance";
 
 export default function Index() {
   return (
     <>
       <Hero />
-      <PopularTourPackages/>
+      {/* <BalanceDisplay balance={11000000}/> */}
     </>
   );
 }
