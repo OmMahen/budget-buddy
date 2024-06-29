@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import BalanceDisplay from "@/components/Balance";
 import TransactionsDisplay from "@/components/Transactions";
+import TransactionsForm from "@/components/TransactionForm";
 
 export default async function ProtectedPage() {
   const supabase = createClient();
@@ -31,7 +32,10 @@ export default async function ProtectedPage() {
   return (
     <div className="w-full p-4">
       <BalanceDisplay balance={balance} />
-      <TransactionsDisplay transactions={data} />
+      <div className="flex flex-col xl:flex-row gap-4">
+        <TransactionsDisplay transactions={data} />
+        <TransactionsForm />
+      </div>
     </div>
   );
 }

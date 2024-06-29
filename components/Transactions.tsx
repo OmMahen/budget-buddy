@@ -14,9 +14,9 @@ export default function TransactionsDisplay({ transactions }: any) {
           <Table.HeadCell>Type</Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
-          {transactions.map((transaction: any) => (
+          {transactions.map((transaction: any, index: any) => (
             <Table.Row
-              key={transaction.transaction_id}
+              key={`${index}-${transaction.transaction_id}`}
               className="bg-white dark:border-gray-700 dark:bg-gray-800"
             >
               <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
