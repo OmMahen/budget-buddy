@@ -1,9 +1,13 @@
 "use client";
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import { usePathname } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 
-export const UserContext = createContext<any>([null, () => {}]);
+const UserContext = createContext<any>([null, () => {}]);
+
+export const useUserContext = () => {
+  return useContext(UserContext);
+};
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<any>(null);
@@ -20,7 +24,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   }, [pathname]);
 
   return (
-    <UserContext.Provider value={[user, setUser]}>
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );

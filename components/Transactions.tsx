@@ -1,8 +1,12 @@
 "use client";
+import { useEffect, useState } from "react";
 import { Table } from "flowbite-react";
 import { Badge } from "flowbite-react";
+import { useTransactionsContext } from "@/utils/transactionsContext";
 
-export default function TransactionsDisplay({ transactions }: any) {
+export default function TransactionsDisplay() {
+  const { transactions } = useTransactionsContext();
+
   return (
     <div className="overflow-x-auto">
       <Table>
@@ -27,7 +31,17 @@ export default function TransactionsDisplay({ transactions }: any) {
               </Table.Cell>
               <Table.Cell>{transaction.description}</Table.Cell>
               <Table.Cell>${transaction.amount.toFixed(2)}</Table.Cell>
-              <Table.Cell>{transaction.categories.type === 'income' ? <Badge color="success" className="inline">Income</Badge> : <Badge color="failure" className="inline">Expense</Badge>}</Table.Cell>
+              <Table.Cell>
+                {transaction.categories.type === "income" ? (
+                  <Badge color="success" className="inline">
+                    Income
+                  </Badge>
+                ) : (
+                  <Badge color="failure" className="inline">
+                    Expense
+                  </Badge>
+                )}
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

@@ -2,11 +2,11 @@
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 import { Button } from "flowbite-react";
-import { UserContext } from "@/utils/userContext";
 import { useContext } from "react";
+import { useUserContext } from "@/utils/userContext";
 
 export default function AuthButton() {
-  const [user, setUser] = useContext(UserContext);
+  const { user } = useUserContext();
   const router = useRouter();
 
   const signIn = () => {

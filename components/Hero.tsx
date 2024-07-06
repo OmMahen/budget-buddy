@@ -1,9 +1,9 @@
 "use client";
-import { UserContext } from "@/utils/userContext";
+import { useUserContext } from "@/utils/userContext";
 import { useContext } from "react";
 
 export function Hero() {
-  const [user, setUser] = useContext(UserContext);
+  const { user } = useUserContext();
 
   const getEmailName = (email: any) => {
     return email.split("@")[0];

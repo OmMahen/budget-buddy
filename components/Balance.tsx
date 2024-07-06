@@ -2,13 +2,24 @@
 import React, { useState } from "react";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { Card } from "flowbite-react";
+import { useTransactionsContext } from "@/utils/transactionsContext";
 
-interface BalanceDisplayProps {
-  balance: number;
-}
+const countBalance = (transactions: Array<any>) => {
+  let balance = 0;
+  transactions?.forEach((transaction: any) => {
+    if (transaction.categories.type === "income") {
+      balance += transaction.amount;
+    } else {
+      balance -= transaction.amount;
+    }
+  });
+  return balance;
+};
 
-const BalanceDisplay: React.FC<BalanceDisplayProps> = ({ balance }) => {
+const BalanceDisplay = () => {
   const [showBalance, setShowBalance] = useState(false);
+  const { transactions } = useTransactionsContext();
+  const balance = countBalance(transactions);
 
   const toggleBalanceVisibility = () => {
     setShowBalance((prev) => !prev);
@@ -42,7 +53,11 @@ const BalanceDisplay: React.FC<BalanceDisplayProps> = ({ balance }) => {
               className="text-gray-500 hover:text-gray-800 focus:outline-none ml-4"
               onClick={toggleBalanceVisibility}
             >
-              {showBalance ? <FaEyeSlash className="md:text-2xl" /> : <FaEye className="md:text-2xl" />}
+              {showBalance ? (
+                <FaEyeSlash className="md:text-2xl" />
+              ) : (
+                <FaEye className="md:text-2xl" />
+              )}
             </button>
           </div>
         </div>

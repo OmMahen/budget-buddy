@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import BalanceDisplay from "@/components/Balance";
 import TransactionsDisplay from "@/components/Transactions";
 import TransactionsForm from "@/components/TransactionForm";
+import { TransactionsContextProvider } from "@/utils/transactionsContext";
 
 export default async function ProtectedPage() {
   const supabase = createClient();
@@ -20,22 +21,20 @@ export default async function ProtectedPage() {
     .select("date, amount, description, categories(type)")
     .eq("user_id", user.id);
 
-  let balance = 0;
-  data?.forEach((transaction: any) => {
-    if (transaction.categories.type === "income") {
-      balance += transaction.amount;
-    } else {
-      balance -= transaction.amount;
-    }
-  });
-
   return (
     <div className="w-full p-4">
-      <BalanceDisplay balance={balance} />
-      <div className="flex flex-col xl:flex-row gap-4">
-        <TransactionsDisplay transactions={data} />
-        <TransactionsForm />
-      </div>
+      <TransactionsContextProvider>
+        <BalanceDisplay />
+        <div className="flex flex-col xl:flex-row gap-4">
+          <div>
+            <p className="text-2xl font-bold text-center mb-4">
+              Recent Transactions
+            </p>
+            <TransactionsDisplay />
+          </div>
+          <TransactionsForm />
+        </div>
+      </TransactionsContextProvider>
     </div>
   );
 }
