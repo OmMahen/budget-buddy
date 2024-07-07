@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
 import { Table } from "flowbite-react";
 import { Badge } from "flowbite-react";
 import { useTransactionsContext } from "@/utils/transactionsContext";

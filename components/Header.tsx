@@ -12,11 +12,11 @@ export default function Header() {
         <Navbar.Toggle />
         <Navbar.Brand href="/">
           <span className="self-center whitespace-nowrap text-xl sm:text-2xl font-bold text-green-600">
-            Travel Yuks
+            Budget Buddy
           </span>
         </Navbar.Brand>
       </div>
-      
+
       <div className="flex items-center md:order-2">
         <AuthButton />
       </div>

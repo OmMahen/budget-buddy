@@ -10,8 +10,8 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Travel Yuks",
-  description: "Travel Yuks Terdepan Dalam Melayani Anda",
+  title: "Budget Buddy",
+  description: "Stay on Budget, Every Transaction.",
 };
 
 export default function RootLayout({

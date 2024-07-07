@@ -55,7 +55,7 @@ export default function TransactionsForm() {
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     setLoading(true);
-    const response = await fetch(`/api/transactions/create`, {
+    const response = await fetch(`/api/transactions`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ categoryId, amount, description }),

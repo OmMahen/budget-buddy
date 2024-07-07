@@ -21,13 +21,11 @@ export function TransactionsContextProvider({
 
   const fetchTransactions = async () => {
     if (user) {
-      const { data } = await supabase
-        .from("transactions")
-        .select("transaction_id, date, amount, description, categories(type)")
-        .eq("user_id", user?.id)
-        .order("date", { ascending: false })
-        .limit(5);
-      setTransactions(data?.reverse());
+      fetch("/api/transactions")
+        .then((res) => res.json())
+        .then((data) => {
+          setTransactions(data?.transactions?.reverse());
+        });
     }
   };
 
