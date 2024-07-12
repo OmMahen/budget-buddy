@@ -14,14 +14,15 @@ import { useTransactionsContext } from "@/utils/transactionsContext";
 
 export default function TransactionsForm() {
   const supabase = createClient();
-  const { transactions, setTransactions } = useTransactionsContext();
+  const { transactions, setTransactions, balance, setBalance } =
+    useTransactionsContext();
 
   const [categories, setCategories] = useState<any>([]);
   const [filteredCategories, setFilteredCategories] = useState<any>([]);
   const [selectedType, setSelectedType] = useState<any>("income");
 
   const [categoryId, setCategoryId] = useState<string>("");
-  const [amount, setAmount] = useState<number | undefined>(undefined);
+  const [amount, setAmount] = useState<number>(0);
   const [description, setDescription] = useState<string>("");
 
   const [isLoading, setLoading] = useState<Boolean>(false);
@@ -55,16 +56,29 @@ export default function TransactionsForm() {
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     setLoading(true);
-    const response = await fetch(`/api/transactions`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ categoryId, amount, description }),
-    });
-    if (response.ok) {
-      const newTransaction = (await response.json())[0];
-      setTransactions([...transactions, newTransaction]);
-    }
-    setLoading(false);
+    const updatedBalance =
+      selectedType === "income" ? balance + amount : balance - amount;
+    Promise.all([
+      fetch(`/api/transactions`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ categoryId, amount, description }),
+      }).then((result) => result.json()),
+      fetch(`/api/balances`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ updatedBalance }),
+      }).then((result) => result.json()),
+    ])
+      .then(([transactionsResult, balancesResult]) => {
+        const newTransaction = transactionsResult[0];
+        setTransactions([...transactions, newTransaction]);
+        setBalance(updatedBalance);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      })
+      .finally(() => setLoading(false));
   };
 
   return (

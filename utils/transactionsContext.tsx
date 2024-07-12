@@ -1,6 +1,5 @@
 "use client";
 import { createContext, useState, useEffect, useContext } from "react";
-import { createClient } from "@/utils/supabase/client";
 import { Spinner } from "flowbite-react";
 import { useUserContext } from "./userContext";
 
@@ -17,14 +16,20 @@ export function TransactionsContextProvider({
 }) {
   const { user } = useUserContext();
   const [transactions, setTransactions] = useState<any>(null);
-  const supabase = createClient();
+  const [balance, setBalance] = useState(0);
 
   const fetchTransactions = async () => {
     if (user) {
-      fetch("/api/transactions")
-        .then((res) => res.json())
-        .then((data) => {
-          setTransactions(data?.transactions?.reverse());
+      Promise.all([
+        fetch("/api/transactions").then((res) => res.json()),
+        fetch("/api/balances").then((result) => result.json()),
+      ])
+        .then(([transactionsData, balancesData]) => {
+          setTransactions(transactionsData?.transactions?.reverse());
+          setBalance(balancesData?.data[0]?.balance);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
         });
     }
   };
@@ -42,7 +47,9 @@ export function TransactionsContextProvider({
   }
 
   return (
-    <TransactionsContext.Provider value={{ transactions, setTransactions }}>
+    <TransactionsContext.Provider
+      value={{ transactions, setTransactions, balance, setBalance }}
+    >
       {children}
     </TransactionsContext.Provider>
   );

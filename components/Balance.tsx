@@ -1,25 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { Card } from "flowbite-react";
 import { useTransactionsContext } from "@/utils/transactionsContext";
 
-const countBalance = (transactions: Array<any>) => {
-  let balance = 0;
-  transactions?.forEach((transaction: any) => {
-    if (transaction.categories.type === "income") {
-      balance += transaction.amount;
-    } else {
-      balance -= transaction.amount;
-    }
-  });
-  return balance;
-};
-
 const BalanceDisplay = () => {
   const [showBalance, setShowBalance] = useState(false);
-  const { transactions } = useTransactionsContext();
-  const balance = countBalance(transactions);
+  const { balance } = useTransactionsContext();
 
   const toggleBalanceVisibility = () => {
     setShowBalance((prev) => !prev);
