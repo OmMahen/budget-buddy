@@ -5,7 +5,7 @@ import TransactionsDisplay from "@/components/Transactions";
 import TransactionsForm from "@/components/TransactionForm";
 import { TransactionsContextProvider } from "@/utils/transactionsContext";
 
-export default async function ProtectedPage() {
+export default async function Dashboard() {
   const supabase = createClient();
 
   const {

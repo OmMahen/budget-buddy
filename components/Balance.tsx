@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { Card } from "flowbite-react";
 import { useTransactionsContext } from "@/utils/transactionsContext";
+import { formatToIDR } from "@/utils/lib";
 
 const BalanceDisplay = () => {
   const [showBalance, setShowBalance] = useState(false);
@@ -10,14 +11,6 @@ const BalanceDisplay = () => {
 
   const toggleBalanceVisibility = () => {
     setShowBalance((prev) => !prev);
-  };
-
-  const formatToIDR = (value: number) => {
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 2,
-    }).format(value);
   };
 
   const hideBalance = (balance: number) => {

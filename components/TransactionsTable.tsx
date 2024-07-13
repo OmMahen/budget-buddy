@@ -1,14 +1,9 @@
-"use client";
-import { Table } from "flowbite-react";
-import { Badge } from "flowbite-react";
-import { useTransactionsContext } from "@/utils/transactionsContext";
+import { Table, Badge } from "flowbite-react";
 import { formatToIDR } from "@/utils/lib";
 
-export default function TransactionsDisplay() {
-  const { transactions } = useTransactionsContext();
-
+export default function TransactionsTable({ transactions }: any) {
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto max-w-screen-lg mx-auto">
       <Table>
         <Table.Head>
           <Table.HeadCell>Date</Table.HeadCell>
@@ -18,7 +13,7 @@ export default function TransactionsDisplay() {
           <Table.HeadCell>Type</Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
-          {transactions.map((transaction: any, index: any) => (
+          {transactions?.map((transaction: any, index: any) => (
             <Table.Row
               key={`${index}-${transaction.transaction_id}`}
               className="bg-white dark:border-gray-700 dark:bg-gray-800"

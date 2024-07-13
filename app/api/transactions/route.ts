@@ -38,6 +38,11 @@ export async function GET(request: Request) {
   if (!user)
     return NextResponse.json({ message: "Forbidden" }, { status: 403 });
 
+  const { count } = await supabase
+    .from("transactions")
+    .select("transaction_id", { count: "exact" })
+    .eq("user_id", user?.id);
+
   const { data, error } = await supabase
     .from("transactions")
     .select("transaction_id, date, amount, description, categories(type)")
@@ -49,5 +54,9 @@ export async function GET(request: Request) {
     return NextResponse.json({ message: "Error", error: error.message });
   }
 
-  return NextResponse.json({ message: "Success", transactions: data });
+  return NextResponse.json({
+    message: "Success",
+    total: count,
+    transactions: data,
+  });
 }

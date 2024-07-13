@@ -24,7 +24,7 @@ export default function Header() {
       <Navbar.Collapse>
         <Navbar.Link href="/">Home</Navbar.Link>
         <Navbar.Link href="/dashboard">Dashboard</Navbar.Link>
-        <Navbar.Link href="/#">Transactions</Navbar.Link>
+        <Navbar.Link href="/transactions">Transactions</Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   );
